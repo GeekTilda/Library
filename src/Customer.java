@@ -38,15 +38,17 @@ public class Customer extends Human {
     }
 
     public String writeBorrowedBooks() {
+        int num = 0;
         String borrowedBook = "";
         for (Book b : borrowedBooks) {
-            borrowedBook += b + ", ";
+            num++;
+            borrowedBook += "\n" + num + ": \n" + b + ", ";
         }
         return borrowedBook;
     }
 
     @Override
     public String toString() {
-        return " Username: " + username + " | Name: " + getName() + " | Age: " + getAge() + " | Borrowed books: " + writeBorrowedBooks();
+        return "Username: " + username + " | Name: " + getName() + " | Age: " + getAge() + "\nBorrowed book(s): " + writeBorrowedBooks();
     }
 }

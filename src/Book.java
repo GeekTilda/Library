@@ -57,6 +57,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Name: " + name + " | Author: " + author + " | Pages: " + pages + " | Date: " + date + " | Genre(s): " + writeGenres();
+        return "Name: " + name + " | Author: " + author + "\nPages: " + pages + " | Date: " + date + "\nGenre(s): " + writeGenres();
     }
 }
