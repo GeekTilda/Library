@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,7 +16,20 @@ public class Library {
     }
 
     public void start() {
-        login();
+
+    }
+
+    public void loginRegister() throws IOException {
+        System.out.println("1. Login");
+        System.out.println("2. Register");
+        System.out.println("3. Browse books");
+        System.out.println("4. Exit");
+        switch (System.in.read()) {
+            case 1 -> login();
+            case 2 -> register();
+            case 3 -> System.out.println("BROWSE BOOKS");
+            case 4 -> System.exit(0);
+        }
     }
 
     public Boolean login() {
