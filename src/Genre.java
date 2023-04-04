@@ -5,6 +5,7 @@ public enum Genre {
     COMEDY,
     THRILLER,
     FANTASY,
+    ADVENTURE,
     FICTION,
     MYSTERY,
     ACTION,

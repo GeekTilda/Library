@@ -35,6 +35,18 @@ public class Customer extends Human {
 
     public void addBook(Book book) {
         borrowedBooks.add(book);
+
+    }
+
+    public void removeBook(String name) {
+        for (Book b : borrowedBooks) {
+            if (name.equalsIgnoreCase(b.getName())) {
+                borrowedBooks.remove(b);
+                System.out.println("Successfully returned! ");
+                return;
+            }
+        }
+        System.out.println("You have not borrowed this book! ");
     }
 
     public String writeBorrowedBooks() {

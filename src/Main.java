@@ -1,7 +1,8 @@
+import java.io.IOException;
 import java.util.Date;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         /*
         Book book = new Book(new Author("Maria Andersson",33), "Din mamma",2,new Date());
         book.addGenre(Genre.CHILDREN);
