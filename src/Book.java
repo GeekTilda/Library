@@ -8,6 +8,7 @@ public class Book {
     private int pages;
     private Date date;
     private ArrayList<Genre> genres;
+    private Boolean borrowed = false;
 
     public Book(Author author, String name, int pages, Date date) {
         this.author = author;
@@ -55,8 +56,16 @@ public class Book {
         return allGenres;
     }
 
+    public Boolean getBorrowed() {
+        return borrowed;
+    }
+
+    public void setBorrowed(Boolean borrowed) {
+        this.borrowed = borrowed;
+    }
+
     @Override
     public String toString() {
-        return "Name: " + name + " | Author: " + author + "\nPages: " + pages + " | Date: " + date + "\nGenre(s): " + writeGenres();
+        return "Name: " + name + " | Author: " + author + "\nPages: " + pages + " | Date: " + date + "\nGenre(s): " + writeGenres() + " | Borrowed: " + borrowed;
     }
 }

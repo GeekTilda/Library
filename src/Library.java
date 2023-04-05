@@ -19,7 +19,6 @@ public class Library {
         book.addGenre(Genre.ROMANCE);
         book.addGenre(Genre.CHILDREN);
         bookList.add(book);
-        customer.addBook(book);
         loginRegister();
     }
 
@@ -33,8 +32,8 @@ public class Library {
             try {
                 choice = scanner.nextInt();
             } catch (Exception e) {
-                System.out.println("Write number! (1-4)");
             }
+
             if (choice == 1) {
                 login();
                 break;
@@ -46,6 +45,7 @@ public class Library {
             } else if (choice == 4) {
                 System.exit(0);
             } else {
+                scanner.next();
                 System.out.println("Write number! (1-4)");
             }
         }
@@ -63,12 +63,11 @@ public class Library {
             try {
                 choice = scanner.nextInt();
             } catch (Exception e) {
-                System.out.println("Write number! (1-6)");
             }
             if (choice == 1) {
                 browseBooks();
             } else if (choice == 2) {
-                customer.writeBorrowedBooks();
+                System.out.println(customer.writeBorrowedBooks());
             } else if (choice == 3) {
                 borrowBook(customer);
             } else if (choice == 4) {
@@ -78,6 +77,7 @@ public class Library {
             } else if (choice == 6) {
                 System.exit(0);
             } else {
+                scanner.next();
                 System.out.println("Write number! (1-6)");
             }
         }
@@ -124,6 +124,7 @@ public class Library {
 
     public Boolean register() {
         System.out.println("Whats your real name? ");
+        scanner.next();
         String name = scanner.next();
         System.out.println("Whats your age? ");
         int age = scanner.nextInt();
@@ -141,6 +142,7 @@ public class Library {
         Customer customer = new Customer(name,age,password,username);
         customerList.add(customer);
         System.out.println("Account created!");
+        mainMenu(customer);
         return true;
     }
 
@@ -154,9 +156,10 @@ public class Library {
 
     public void borrowBook(Customer customer) {
         System.out.println("Whats the books name? ");
-        String name = scanner.next();
+        scanner.nextLine();
+        String name = scanner.nextLine().trim().toLowerCase();
         for (Book b : bookList) {
-            if (name.equalsIgnoreCase(b.getName())) {
+            if (name.equals(b.getName().trim().toLowerCase())) {
                 System.out.println("Borrowed book: " + b.getName());
                 customer.addBook(b);
                 return;
@@ -199,5 +202,13 @@ public class Library {
             }
         }
         return false;
+    }
+
+    public Boolean isBorrowed(Book book) {
+        if (book.getBorrowed()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
