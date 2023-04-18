@@ -12,6 +12,7 @@ public class Library {
     Scanner scanner = new Scanner(System.in);
     Customer customer = new Customer("Tilda", 18, "12345", "GeekTilda");
     Book book = new Book(new Author("Jonatan Liljeblad",18),"Jonatans adventure",69,new Date());
+    int login = 1;
     public Library() {}
 
     public void start() {
@@ -23,7 +24,7 @@ public class Library {
     }
 
     public void loginRegister() {
-        while (true) {
+        while (login == 1) {
             System.out.println("1. Login");
             System.out.println("2. Register");
             System.out.println("3. Browse books");
@@ -36,10 +37,10 @@ public class Library {
 
             if (choice == 1) {
                 login();
-                break;
+                //break;
             } else if (choice == 2) {
                 register();
-                break;
+                //break;
             } else if (choice == 3) {
                 browseBooks();
             } else if (choice == 4) {
@@ -52,7 +53,7 @@ public class Library {
     }
 
     public void mainMenu(Customer customer) {
-        while (true) {
+        while (login == 2) {
             System.out.println("1. Browse books");
             System.out.println("2. My borrowed books");
             System.out.println("3. Borrow book");
@@ -73,6 +74,7 @@ public class Library {
             } else if (choice == 4) {
                 customer.removeBook(bookName());
             } else if (choice == 5) {
+                login = 1;
                 loginRegister();
             } else if (choice == 6) {
                 System.exit(0);
@@ -97,6 +99,7 @@ public class Library {
         String password = scanner.next();
         if (passExist(username,password)) {
             System.out.println("Correct password");
+            login = 2;
             mainMenu(customer); //CHANGE
         }
         if (!passExist(username,password)) {
@@ -133,6 +136,7 @@ public class Library {
         for (Customer c : customerList) {
             if (userExist(username)) {
                 System.out.println("Username already exists!");
+                login = 1;
                 return false;
             }
         }
@@ -142,6 +146,7 @@ public class Library {
         Customer customer = new Customer(name,age,password,username);
         customerList.add(customer);
         System.out.println("Account created!");
+        login = 2;
         mainMenu(customer);
         return true;
     }
