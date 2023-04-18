@@ -41,6 +41,7 @@ public class Customer extends Human {
     public void removeBook(String name) {
         for (Book b : borrowedBooks) {
             if (name.equalsIgnoreCase(b.getName())) {
+                b.setBorrowed(false);
                 borrowedBooks.remove(b);
                 System.out.println("Successfully returned! ");
                 return;

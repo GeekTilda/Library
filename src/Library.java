@@ -160,9 +160,15 @@ public class Library {
         String name = scanner.nextLine().trim().toLowerCase();
         for (Book b : bookList) {
             if (name.equals(b.getName().trim().toLowerCase())) {
-                System.out.println("Borrowed book: " + b.getName());
-                customer.addBook(b);
-                return;
+                if (!isBorrowed(b)) {
+                    System.out.println("Borrowed book: " + b.getName());
+                    customer.addBook(b);
+                    b.setBorrowed(true);
+                    return;
+                } else {
+                    System.out.println("Is already borrowed!");
+                    return;
+                }
             }
         }
         System.out.println("Book doesnt exist! ");
@@ -170,7 +176,8 @@ public class Library {
 
     public String bookName() {
         System.out.println("Whats the name of the book you want to return? ");
-        String name = scanner.next();
+        scanner.nextLine();
+        String name = scanner.nextLine().trim().toLowerCase();
         return name;
     }
 
