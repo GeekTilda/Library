@@ -1,20 +1,34 @@
-import java.io.IOException;
+import java.io.*;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        /*
-        Book book = new Book(new Author("Maria Andersson",33), "Din mamma",2,new Date());
-        book.addGenre(Genre.CHILDREN);
-        book.addGenre(Genre.HORROR);
-        System.out.println(book);
-        Customer customer = new Customer("Jonis", 5,"","Jonis1");
-        customer.addBook(new Book(new Author("Maria Andersson",5), "Jonis äventyr", 5, new Date()));
-        customer.addBook(book);
-        System.out.println(customer);
-
-         */
-        Library library = new Library();
-        library.start();
+        //Library library = new Library();
+        //library.start();
+        File server = null;
+        try {
+            server = new File("Server.txt");
+        } catch (Exception e) {
+            System.out.println("Didnt work");
+        }
+        FileWriter writer = new FileWriter(server, true);
+        writer.write("Hej");
+        writer.write("då");
+        writer.close();
+        Scanner scanner = new Scanner(server);
+        while (scanner.hasNextLine()) {
+            String hej = scanner.next();
+            System.out.println(hej);
+        }
+    }
+    public Boolean fileExist(File server) {
+        if (server.exists()) {
+            return true;
+        }
+        else {
+            File file = new File("Server.txt");
+            return false;
+        }
     }
 }
