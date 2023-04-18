@@ -52,7 +52,7 @@ public class Library {
         }
     }
 
-    public void mainMenu(Customer customer) {
+    public void mainMenu(Customer customer) { // test
         while (login == 2) {
             System.out.println("1. Browse books");
             System.out.println("2. My borrowed books");
