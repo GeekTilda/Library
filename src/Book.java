@@ -6,11 +6,11 @@ public class Book {
     private Author author;
     private String name;
     private int pages;
-    private Date date;
+    private String date;
     private ArrayList<Genre> genres;
     private Boolean borrowed = false;
 
-    public Book(Author author, String name, int pages, Date date) {
+    public Book(Author author, String name, int pages, String date) {
         this.author = author;
         this.name = name;
         this.pages = pages;
@@ -32,7 +32,7 @@ public class Book {
         return pages;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 

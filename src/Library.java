@@ -11,7 +11,7 @@ public class Library {
     private ArrayList<Customer> customerList = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
     Customer customer = new Customer("Tilda", 18, "12345", "GeekTilda");
-    Book book = new Book(new Author("Jonatan Liljeblad",18),"Jonatans adventure",69,new Date());
+    Book book = new Book(new Author("Jonatan Liljeblad",18),"Jonatans adventure",69,new Date().toString());
     int login = 1;
     public Library() {}
 
@@ -177,6 +177,14 @@ public class Library {
             }
         }
         System.out.println("Book doesnt exist! ");
+    }
+
+    public void addBook(Book book) {
+        bookList.add(book);
+    }
+
+    public void addCustomer(Customer customer) {
+        customerList.add(customer);
     }
 
     public String bookName() {
