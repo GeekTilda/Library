@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -11,19 +14,18 @@ public class Library {
     private ArrayList<Customer> customerList = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
     Customer customer = new Customer("Tilda", 18, "12345", "GeekTilda");
-    Book book = new Book(new Author("Jonatan Liljeblad",18),"Jonatans adventure",69,new Date().toString());
     int login = 1;
-    public Library() {}
+    File server;
+    public Library(File server) {
+        this.server = server;
+    }
 
-    public void start() {
-        book.addGenre(Genre.ADVENTURE);
-        book.addGenre(Genre.ROMANCE);
-        book.addGenre(Genre.CHILDREN);
-        bookList.add(book);
+    public void start() throws IOException {
+        new BookInit(server,this);
         loginRegister();
     }
 
-    public void loginRegister() {
+    public void loginRegister() throws IOException {
         while (login == 1) {
             System.out.println("1. Login");
             System.out.println("2. Register");
@@ -52,7 +54,7 @@ public class Library {
         }
     }
 
-    public void mainMenu(Customer customer) { // test
+    public void mainMenu(Customer customer) throws IOException { // test
         while (login == 2) {
             System.out.println("1. Browse books");
             System.out.println("2. My borrowed books");
@@ -77,6 +79,7 @@ public class Library {
                 login = 1;
                 loginRegister();
             } else if (choice == 6) {
+                save();
                 System.exit(0);
             } else {
                 scanner.next();
@@ -85,7 +88,7 @@ public class Library {
         }
     }
 
-    public Boolean login() {
+    public Boolean login() throws IOException {
         customerList.add(customer); //ONLY FOR TESTING. Tilda, 18, 12345, GeekTilda
         System.out.println("Whats your username? ");
         String username = scanner.next();
@@ -125,7 +128,7 @@ public class Library {
         return true;
     }
 
-    public Boolean register() {
+    public Boolean register() throws IOException {
         System.out.println("Whats your real name? ");
         scanner.next();
         String name = scanner.next();
@@ -229,6 +232,13 @@ public class Library {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public void save() throws IOException {
+        FileWriter writer = new FileWriter(server, true);
+        for (Book book : bookList) {
+            writer.write("\n" + "Name;" + book.getName() + ";Pages;" + book.getPages() + ";Genres;" + book.getGenres() + ";Author;" + book.getAuthor() + ";Date;" + book.getDate() + ";Borrowed;" + book.getBorrowed());
         }
     }
 }
