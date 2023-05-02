@@ -1,9 +1,9 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
 
 public class Main {
+    /*
+    *   Initiate server and library
+    */
     public static void main(String[] args) throws IOException {
         File server = null;
         try {
@@ -13,22 +13,5 @@ public class Main {
         }
         Library library = new Library(server);
         library.start();
-
-    }
-    public Boolean fileExist(File customers, File books) {
-        if (customers.exists() && books.exists()) {
-            return true;
-        }
-        else if (customers.exists() && !books.exists()){
-            File file = new File("Books.txt");
-            return false;
-        } else if (!customers.exists() && books.exists()) {
-            File file = new File("Customers.txt");
-            return false;
-        } else {
-            File file = new File("Books.txt");
-            File file2 = new File("Customers.txt");
-            return false;
-        }
     }
 }

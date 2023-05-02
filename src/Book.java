@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Book {
 
@@ -17,8 +16,6 @@ public class Book {
         this.date = date;
         this.genres = new ArrayList<>();
     }
-
-
 
     public Author getAuthor() {
         return author;
@@ -48,6 +45,9 @@ public class Book {
         genres.remove(genre);
     }
 
+    /*
+     *  Writes all the genres of a book
+     */
     public String writeGenres() {
         String allGenres = "";
         for (Genre g : genres) {
@@ -64,6 +64,10 @@ public class Book {
         this.borrowed = borrowed;
     }
 
+    /*
+     *  Overrides the "toString()" method that already exists.
+     *  If sout(book); is written, it will write this instead.
+     */
     @Override
     public String toString() {
         return "Name: " + name + " | Author: " + author + "\nPages: " + pages + " | Date: " + date + "\nGenre(s): " + writeGenres() + " | Borrowed: " + borrowed;

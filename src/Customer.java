@@ -33,11 +33,13 @@ public class Customer extends Human {
         return borrowedBooks;
     }
 
-    public void addBook(Book book) {
-        borrowedBooks.add(book);
+    public void addBook(Book book) { borrowedBooks.add(book); }
 
-    }
-
+    /*
+     *  Goes through all of our borrowed books,
+     *  If the name of a book we have borrowed matches:
+     *  Returns the book (false) and removes from our list of borrowed books
+     */
     public void removeBook(String name) {
         for (Book b : borrowedBooks) {
             if (name.equalsIgnoreCase(b.getName())) {
@@ -50,6 +52,9 @@ public class Customer extends Human {
         System.out.println("You have not borrowed this book! ");
     }
 
+    /*
+     *  Writes all of our borrowed books in a list
+     */
     public String writeBorrowedBooks() {
         int num = 0;
         String borrowedBook = "";

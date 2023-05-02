@@ -1,14 +1,10 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Library {
-
     private ArrayList<Book> bookList = new ArrayList<>();
     private ArrayList<Author> authorList = new ArrayList<>();
     private ArrayList<Customer> customerList = new ArrayList<>();
@@ -20,11 +16,17 @@ public class Library {
         this.server = server;
     }
 
+
     public void start() throws IOException {
         new BookInit(server,this);
+        customerList.add(customer);
         loginRegister();
     }
 
+    /*
+     *  Starts when the program starts
+     *  Choices on what to do next
+     */
     public void loginRegister() throws IOException {
         while (login == 1) {
             System.out.println("1. Login");
@@ -46,6 +48,7 @@ public class Library {
             } else if (choice == 3) {
                 browseBooks();
             } else if (choice == 4) {
+                save();
                 System.exit(0);
             } else {
                 scanner.next();
@@ -54,6 +57,10 @@ public class Library {
         }
     }
 
+    /*
+     *  When logged in/registrerd, this menu is presented
+     *  Gives choices on what to do next
+     */
     public void mainMenu(Customer customer) throws IOException { // test
         while (login == 2) {
             System.out.println("1. Browse books");
@@ -88,22 +95,25 @@ public class Library {
         }
     }
 
+    /*
+     *  Checks if login is true.
+     *  If it is true, continues
+     *  Else, goes back to loginRegister()
+     */
     public Boolean login() throws IOException {
-        customerList.add(customer); //ONLY FOR TESTING. Tilda, 18, 12345, GeekTilda
         System.out.println("Whats your username? ");
         String username = scanner.next();
         if (!userExist(username)) {
             System.out.println("User doesnt exist!");
             return false;
         }
-        Customer cus = getCustomer(username);
         System.out.println("Username found");
         System.out.println("Whats your password? ");
         String password = scanner.next();
         if (passExist(username,password)) {
             System.out.println("Correct password");
             login = 2;
-            mainMenu(customer); //CHANGE
+            mainMenu(getCustomer(username));
         }
         if (!passExist(username,password)) {
             System.out.println("Wrong password!");
@@ -118,9 +128,9 @@ public class Library {
             if (i == 1) {
                 System.out.println("Write new password: ");
                 String newPassword = scanner.next();
-                customer.setPassword(newPassword); //CHANGE
+                getCustomer(username).setPassword(password);
                 System.out.println(newPassword);
-                mainMenu(customer); //CHANGE
+                mainMenu(getCustomer(username));
             } else {
                 return false;
             }
@@ -128,6 +138,11 @@ public class Library {
         return true;
     }
 
+    /*
+     *  Checks if register is true
+     *  If it is true, a new account is created, added to customerList and logged into.
+     *  Else, returns to loginRegister()
+     */
     public Boolean register() throws IOException {
         System.out.println("Whats your real name? ");
         scanner.next();
@@ -136,12 +151,10 @@ public class Library {
         int age = scanner.nextInt();
         System.out.println("Whats your username? ");
         String username = scanner.next();
-        for (Customer c : customerList) {
-            if (userExist(username)) {
-                System.out.println("Username already exists!");
-                login = 1;
-                return false;
-            }
+        if (userExist(username)) {  //Checks if the username already is used
+            System.out.println("Username already exists!");
+            login = 1;
+            return false;
         }
         System.out.println("Username available!");
         System.out.println("Whats your password? ");
@@ -154,6 +167,9 @@ public class Library {
         return true;
     }
 
+    /*
+     * Makes a list of the books
+     */
     public void browseBooks() {
         int num = 1;
         for (Book b : bookList) {
@@ -162,6 +178,11 @@ public class Library {
         }
     }
 
+    /*
+     *  Checks what book a customer wants to borrow and if it is available
+     *  If it is available, it is added to the customers borrowed books
+     *  Else, it is already borrowed or doesnt exist
+     */
     public void borrowBook(Customer customer) {
         System.out.println("Whats the books name? ");
         scanner.nextLine();
@@ -235,10 +256,14 @@ public class Library {
         }
     }
 
+    /*
+     *  Used before exiting the program. Rewrites (updates) our Server.txt file.
+     */
     public void save() throws IOException {
-        FileWriter writer = new FileWriter(server, true);
+        FileWriter writer = new FileWriter(server, false);
         for (Book book : bookList) {
-            writer.write("\n" + "Name;" + book.getName() + ";Pages;" + book.getPages() + ";Genres;" + book.getGenres() + ";Author;" + book.getAuthor() + ";Date;" + book.getDate() + ";Borrowed;" + book.getBorrowed());
+            writer.write("Name;" + book.getName() + ";Pages;" + book.getPages() + ";Genres;" + book.getGenres() + ";Author;" + book.getAuthor() + ";Date;" + book.getDate() + ";Borrowed;" + book.getBorrowed() + "\n");
         }
+        writer.close();
     }
 }

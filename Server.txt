@@ -1,3 +1,3 @@
 Name;52 Fjärilar;Pages;52;Genres;[HORROR, COMEDY];Author;[ Name: Anna | Age: 47 ];Date;Tue Apr 25 13:49:30 CEST 2023;Borrowed;false
-Name;3 gånger ingen gång;Pages;3;Genres;[ROMANCE, COMEDY];Author;[ Name: Filip | Age: 18 ];Date;Tue Apr 25 13:49:30 CEST 2023;Borrowed;true
+Name;3 gånger ingen gång;Pages;3;Genres;[ROMANCE, COMEDY];Author;[ Name: Filip | Age: 18 ];Date;Tue Apr 25 13:49:30 CEST 2023;Borrowed;false
 Name;Julia är bajs;Pages;42;Genres;[THRILLER, ACTION];Author;[ Name: Julia | Age: 18 ];Date;Tue Apr 25 13:49:30 CEST 2023;Borrowed;true

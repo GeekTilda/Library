@@ -1,3 +1,4 @@
+//Parent class to Author and Customer
 public class Human {
 
     private String name;

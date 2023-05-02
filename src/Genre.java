@@ -1,3 +1,4 @@
+//These are our genres for the books
 public enum Genre {
 
     HORROR,
